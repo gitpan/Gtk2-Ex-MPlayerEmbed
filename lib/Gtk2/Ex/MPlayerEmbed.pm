@@ -1,4 +1,4 @@
-# $Id: MPlayerEmbed.pm,v 1.5 2005/10/17 12:18:06 jodrell Exp $
+# $Id: MPlayerEmbed.pm,v 1.7 2006/01/02 19:44:41 jodrell Exp $
 # Copyright (c) 2005 Gavin Brown. All rights reserved. This program is free
 # software; you can redistribute it and/or modify it under the same terms as
 # Perl itself.
@@ -14,7 +14,7 @@ use Gtk2;
 use vars qw($VERSION $STATE_ENUM_PKG);
 use strict;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 
 BEGIN {
@@ -246,7 +246,7 @@ sub stop {
 	} else {
 		$self->tell_slave(CLOSE);
 		$self->slave->close;
-		undef($self->{slave});
+		$self->{slave} = FileHandle->new;
 		$self->set('loaded', undef);
 		$self->set('state', 'stopped');
 
